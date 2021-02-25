@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     color: '#6a0dad',
     alignSelf: 'center',
-    width: '80%',
+    width: '85%',
     margin: 10,
     padding: 10,
     flexDirection: 'column',

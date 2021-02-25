@@ -6,6 +6,7 @@ import { getInitialData } from './actions/shared';
 
 import Home from './views/Home';
 import { connect } from 'react-redux';
+import NewDeck from './views/NewDeck';
 
 const App = ({ dispatch }) => {
   useEffect(() => {
@@ -15,7 +16,8 @@ const App = ({ dispatch }) => {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <Home />
+      {/* <Home /> */}
+      <NewDeck />
     </View>
   );
 }

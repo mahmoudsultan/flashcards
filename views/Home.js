@@ -9,6 +9,7 @@ const Home = () => {
   return (<View style={styles.fullPage}>
     <View style={styles.cardList}>
       <Text style={styles.cardListTitle}>Select Subject</Text>
+      {/* TODO: Scrollable */}
       {
         Object.keys(decks).map((deckId) => {
           return (
@@ -34,10 +35,10 @@ const styles = StyleSheet.create({
   cardList: {
     flex: 1,
     display: 'flex',
+    paddingTop: 30,
     flexDirection: 'column',
-    justifyContent: 'center',
     backgroundColor: '#fafafa'
   }
-})
+});
 
 export default Home;
