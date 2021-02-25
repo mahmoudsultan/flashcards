@@ -1,9 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Home from './views/Home';
 
-export default function App() {
+import { getInitialData } from './actions/shared';
+
+import Home from './views/Home';
+import { connect } from 'react-redux';
+
+const App = ({ dispatch }) => {
+  useEffect(() => {
+    dispatch(getInitialData())
+  }, [dispatch]);
+
   return (
     <View style={styles.container}>
       <Home />
@@ -20,3 +28,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default connect()(App);

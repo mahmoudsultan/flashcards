@@ -1,0 +1,27 @@
+{
+    "decks": {
+        "science": {
+            "numberOfQuestions": 2,
+            "questions": ["1", "3"]
+        },
+        "sports": {
+            "numberOfQuestions": 1,
+            "questions": ["2"]
+        }
+    },
+    "questions": {
+        "numberOfQuestions": 3,
+        "1": {
+            "question": "How far is the sun?",
+            "answer": "148.09 million km"
+        },
+        "2": {
+            "question": "how many players are in a handball match?",
+            "answer": "11"
+        },
+        "3": {
+            "question": "How big is the earth?",
+            "answer": "6,371 km"
+        }
+    }
+}
