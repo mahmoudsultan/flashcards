@@ -4,7 +4,7 @@ import { useQuestionCard } from './useQuestionCard';
 export const useQuiz = (questions) => {
   const [score, setScore] = useState(0);
 
-  const [questionCard, reachedEnd, setCurrentIndex, setProps] = useQuestionCard(questions);
+  const [currentIndex, questionCard, reachedEnd, setCurrentIndex, setProps] = useQuestionCard(questions);
 
   const isCorrectAnswer = useCallback(() => {
     setScore((score) => score + 1);
@@ -19,5 +19,5 @@ export const useQuiz = (questions) => {
     setProps({ isCorrectAnswer, isWrongAnswer });
   }, [isCorrectAnswer, isWrongAnswer]);
 
-  return [score, questionCard, reachedEnd]
+  return [currentIndex, score, questionCard, reachedEnd]
 }

@@ -15,5 +15,5 @@ export const useQuestionCard = (questions, { initialIndex = 0, initialProps = {}
     }
   }, [currentIndex, props]);
 
-  return [questionCard, reachedEnd, setCurrentIndex, setProps];
+  return [currentIndex, questionCard, reachedEnd, setCurrentIndex, setProps];
 };

@@ -29,13 +29,16 @@ export default ({ question, isCorrectAnswer, isWrongAnswer }) => {
       <View style={styles.buttonContainer}>
         {
           (showAnswer) ? (
-            <View style={styles.selectAnswerContainer} animation="lightSpeedIn">
-              <Button onPress={isCorrectAnswer}>
-                <Text>Yes</Text>
-              </Button>
-              <Button onPress={isWrongAnswer}>
-                <Text>No</Text>
-              </Button>
+            <View>
+              <Text style={styles.selectAnswerTitle}>Did you get it right ?</Text>
+              <View style={styles.selectAnswerContainer} animation="lightSpeedIn">
+                <Button style={{ width: 200, backgroundColor: '#32CD32' }} onPress={isCorrectAnswer}>
+                  <Text>Yes</Text>
+                </Button>
+                <Button style={{ width: 200, backgroundColor: '#EC4C4C' }} onPress={isWrongAnswer}>
+                  <Text>No</Text>
+                </Button>
+              </View>
             </View>
           ) : (
             <View animation="lightSpeedIn">
@@ -52,7 +55,6 @@ export default ({ question, isCorrectAnswer, isWrongAnswer }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
@@ -97,9 +99,21 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     // flex: 1
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   selectAnswerContainer: {
+    width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  selectAnswerTitle: {
+    fontSize: 20,
+    textAlign: 'center',
+    marginTop: 30,
+    fontWeight: '300'
   }
 });
