@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { Text, Platform, TextInput, Pressable, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { addDeck } from '../actions/decks';
 
-const NewDeck = ({ dispatch }) => {
+const NewDeck = ({ dispatch, navigation }) => {
   const [deckName, setDeckName] = useState('');
 
   const onChangeText = useCallback((text) => setDeckName(text), [setDeckName]);
 
   const submitNewDeck = useCallback(() => {
     dispatch(addDeck(deckName));
-    // TODO: Redirect to Deck View
+    navigation.navigate('Deck', { deckId: deckName })
   }, [deckName, dispatch]);
 
   const isDeckNameValid = !!deckName && deckName.length;

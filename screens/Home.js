@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { useSelector } from 'react-redux';
 import DeckCard from '../components/DeckCard';
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const decks = useSelector(({ decks }) => decks);
 
   return (<View style={styles.fullPage}>
@@ -13,7 +13,12 @@ const Home = () => {
       {
         Object.keys(decks).map((deckId) => {
           return (
-            <DeckCard key={deckId} deckId={deckId} numberOfQuestions={decks[deckId].numberOfQuestions} />
+            <Pressable 
+              key={deckId}
+              onPress={() => navigation.navigate('Deck', { deckId })}
+            >
+              <DeckCard deckId={deckId} numberOfQuestions={decks[deckId].numberOfQuestions} />
+            </Pressable>
           );
         })
       }
