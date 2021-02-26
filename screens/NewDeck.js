@@ -1,8 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 
-import { Text, Platform, TextInput, Pressable, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { addDeck } from '../actions/decks';
+
+import { Text, Platform, TextInput, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { Button } from '../components/atoms';
 
 const NewDeck = ({ dispatch, navigation }) => {
   const [deckName, setDeckName] = useState('');
@@ -11,7 +13,8 @@ const NewDeck = ({ dispatch, navigation }) => {
 
   const submitNewDeck = useCallback(() => {
     dispatch(addDeck(deckName));
-    navigation.navigate('Deck', { deckId: deckName })
+    setDeckName('');
+    navigation.navigate('Deck', { deckId: deckName });
   }, [deckName, dispatch]);
 
   const isDeckNameValid = !!deckName && deckName.length;
@@ -28,9 +31,9 @@ const NewDeck = ({ dispatch, navigation }) => {
         value={deckName}
       />
 
-      <Pressable android_ripple style={styles.button} disabled={!isDeckNameValid} onPress={submitNewDeck}>
-        <Text style={styles.buttonText}>Add Deck</Text>
-      </Pressable>
+      <Button disabled={!isDeckNameValid} onPress={submitNewDeck}>
+        Add Deck
+      </Button>
     </KeyboardAvoidingView>
   );
 };
@@ -57,19 +60,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderEndColor: '#000',
     borderWidth: 2
-  },
-  button: {
-    marginTop: 30,
-    backgroundColor: '#6a0dad',
-    paddingVertical: 10,
-    paddingHorizontal: 30,
-    color: 'white',
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
   }
 });
 
