@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 import DeckCard from '../components/DeckCard';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -7,22 +7,24 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const Home = ({ navigation }) => {
   const decks = useSelector(({ decks }) => decks);
 
+  const renderDeck = ({ item }) => (
+    <TouchableOpacity
+      onPressOut={() => navigation.navigate('Deck', { deckId: item.id })}
+    >
+      <DeckCard deckId={item.id} numberOfQuestions={item.numberOfQuestions} />
+    </TouchableOpacity>
+  );
+
+  const decksWithIds = Object.entries(decks).map(([deckId, deck]) => ({ id: deckId, ...deck }));
+
   return (<View style={styles.fullPage}>
     <View style={styles.cardList}>
       <Text style={styles.cardListTitle}>Select Subject</Text>
-      {/* TODO: Scrollable */}
-      {
-        Object.keys(decks).map((deckId) => {
-          return (
-            <TouchableOpacity
-              key={deckId}
-              onPressOut={() => navigation.navigate('Deck', { deckId })}
-            >
-              <DeckCard deckId={deckId} numberOfQuestions={decks[deckId].numberOfQuestions} />
-            </TouchableOpacity>
-          );
-        })
-      }
+      <FlatList
+        data={decksWithIds}
+        renderItem={renderDeck}
+        keyExtractor={item => item.id}
+      />
     </View>
   </View>);
 };
