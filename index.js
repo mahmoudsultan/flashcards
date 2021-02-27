@@ -1,5 +1,5 @@
-import { registerRootComponent } from 'expo';
 import React from 'react';
+import { registerRootComponent } from 'expo';
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -8,8 +8,13 @@ import reducers from './reducers';
 import middlewares from './middlewares';
 
 import App from './App';
+import { reduxSubscriber } from './lib/asyncStorage';
 
 const store = createStore(reducers, middlewares);
+
+store.subscribe(() => {
+  return reduxSubscriber(store.getState)
+});
 
 const ConnectedApp = () => {
   return (
