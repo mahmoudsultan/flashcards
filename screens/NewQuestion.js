@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
+import * as Animatable from 'react-native-animatable';
+
 import { Text, KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { TextInput, Button } from '../components/atoms';
 import { newQuestion } from '../actions/shared';
@@ -12,14 +14,24 @@ export default ({ navigation, route }) => {
 
   const [questionTitle, setQuestionTitle] = useState('');
   const [questionAnswer, setQuestionAnswer] = useState('');
+  const [invalidSubmit, setInvalidSubmit] = useState(false);
 
   const handleAddQuestion = useCallback(() => {
+    const isFormValid = !!questionTitle.trim() && !!questionAnswer.trim();
+
+    if (!isFormValid) {
+      return setInvalidSubmit(true);
+    }
+
+    setInvalidSubmit(false);
+
     dispatch(newQuestion(deckId, { question: questionTitle, answer: questionAnswer }));
     setQuestionTitle('');
     setQuestionAnswer('');
 
     navigation.navigate('Deck', { deckId });
   }, [dispatch, questionTitle, questionAnswer]);
+
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -40,6 +52,7 @@ export default ({ navigation, route }) => {
       >
         Add Question
       </Button>
+      { invalidSubmit && <Animatable.Text animation="shake" style={styles.buttonHint}>Please fill question text and answer.</Animatable.Text> }
     </KeyboardAvoidingView>
   );
 };
@@ -56,4 +69,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textTransform: 'capitalize'
   },
+  buttonHint: {
+    marginTop: 5,
+    color: 'red',
+    fontSize: 17,
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+  }
 });

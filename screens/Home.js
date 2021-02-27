@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { useSelector } from 'react-redux';
 import DeckCard from '../components/DeckCard';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Home = ({ navigation }) => {
   const decks = useSelector(({ decks }) => decks);
@@ -13,12 +14,12 @@ const Home = ({ navigation }) => {
       {
         Object.keys(decks).map((deckId) => {
           return (
-            <Pressable 
+            <TouchableOpacity
               key={deckId}
-              onPress={() => navigation.navigate('Deck', { deckId })}
+              onPressOut={() => navigation.navigate('Deck', { deckId })}
             >
               <DeckCard deckId={deckId} numberOfQuestions={decks[deckId].numberOfQuestions} />
-            </Pressable>
+            </TouchableOpacity>
           );
         })
       }
