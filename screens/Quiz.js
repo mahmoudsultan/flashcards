@@ -13,6 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 import { Button } from '../components/atoms';
+import NoQuestionsCard from '../components/NoQuestionsCard';
 
 export default ({ navigation, route }) => {
   const deckId = route.params.deckId;
@@ -21,6 +22,12 @@ export default ({ navigation, route }) => {
     const deckQuestions = decks[deckId].questions;
     return deckQuestions.map((questionId) => questions[questionId]);
   });
+
+  if (!questions.length) {
+    return (
+      <NoQuestionsCard navigation={navigation} deckId={deckId} />
+    );
+  }
 
   const [currentIndex, score, questionCard, reachedEnd] = useQuiz(questions);
 
