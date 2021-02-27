@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
+import { clearLocalQuizNotification, setLocalQuizNotification } from './lib/notifications'
+
 import { getInitialData } from './actions/shared';
 
 import { StyleSheet, SafeAreaView, StatusBar, Platform } from 'react-native';
@@ -83,6 +85,10 @@ const NewDeckStackNavigation = () => {
 }
 
 const App = ({ dispatch }) => {
+  useEffect(() => {
+    setLocalQuizNotification();
+  }, []);
+
   useEffect(() => {
     dispatch(getInitialData())
   }, [dispatch]);

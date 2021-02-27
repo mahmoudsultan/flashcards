@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { clearLocalQuizNotification, setLocalQuizNotification } from '../lib/notifications'
 
 import { useSelector } from 'react-redux';
 import { useQuiz } from '../hooks/useQuiz';
@@ -21,6 +23,13 @@ export default ({ navigation, route }) => {
   });
 
   const [currentIndex, score, questionCard, reachedEnd] = useQuiz(questions);
+
+  useEffect(() => {
+    if (reachedEnd) {
+      clearLocalQuizNotification();
+      setLocalQuizNotification();
+    }
+  }, [reachedEnd]);
 
   return (
     <View style={styles.container}>
